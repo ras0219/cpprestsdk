@@ -533,6 +533,12 @@ public:
         _ASYNCRTIMP const utility::string_t& as_string() const;
 
         /// <summary>
+        /// Converts the JSON value to a UTF-8 C++ STL string, if and only if it is a string value.
+        /// </summary>
+        /// <returns>A UTF-8 C++ STL string representation of the value</returns>
+        _ASYNCRTIMP utf8string as_utf8string() const;
+
+        /// <summary>
         /// Compares two JSON values for equality.
         /// </summary>
         /// <param name="other">The JSON value to compare with.</param>
@@ -612,14 +618,12 @@ public:
         _ASYNCRTIMP value & operator [] (const utility::string_t &key);
 
 #ifdef _WIN32
-private:
         // Only used internally by JSON parser
         _ASYNCRTIMP value & operator [] (const std::string &key)
         {
             // JSON object stores its field map as a unordered_map of string_t, so this conversion is hard to avoid
             return operator[](utility::conversions::to_string_t(key));
         }
-public:
 #endif
 
         /// <summary>
@@ -1145,6 +1149,12 @@ public:
 
             return iter->second;
         }
+#ifdef WIN32
+        const json::value& at(const utf8string& key) const
+        {
+            return at(utility::conversions::to_string_t(key));
+        }
+#endif
 
         /// <summary>
         /// Accesses an element of a JSON object.
@@ -1162,6 +1172,12 @@ public:
 
             return iter->second;
         }
+#ifdef WIN32
+        json::value& operator[](const utf8string& key)
+        {
+            return operator[](utility::conversions::to_string_t(key));
+        }
+#endif
 
         /// <summary>
         /// Gets an iterator to an element of a JSON object.
@@ -1463,6 +1479,7 @@ public:
             virtual json::object& as_object() { throw json_exception(_XPLATSTR("not an object")); }
             virtual const json::object& as_object() const { throw json_exception(_XPLATSTR("not an object")); }
             virtual const utility::string_t& as_string() const { throw json_exception(_XPLATSTR("not a string")); }
+            virtual utf8string as_utf8string() const { return utility::conversions::to_utf8string(as_string()); }
 
             virtual size_t size() const { return 0; }
 

@@ -265,6 +265,11 @@ const utility::string_t & web::json::value::as_string() const
     return m_value->as_string();
 }
 
+utf8string web::json::value::as_utf8string() const
+{
+    return m_value->as_utf8string();
+}
+
 utility::string_t json::value::serialize() const
 {
 #ifndef _WIN32

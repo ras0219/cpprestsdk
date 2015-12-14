@@ -464,11 +464,28 @@ public:
     /// <returns>An asynchronous operation that is completed once a response from the request is received.</returns>
     pplx::task<http_response> request(
         const method &mtd,
-        const utility::string_t &path_query_fragment,
+        const utf16string &path_query_fragment,
         const pplx::cancellation_token &token = pplx::cancellation_token::none())
     {
         http_request msg(mtd);
-        msg.set_request_uri(path_query_fragment);
+        msg.set_request_uri(::utility::conversions::to_string_t(path_query_fragment));
+        return request(msg, token);
+    }
+
+    /// <summary>
+    /// Asynchronously sends an HTTP request.
+    /// </summary>
+    /// <param name="mtd">HTTP request method.</param>
+    /// <param name="path_query_fragment">String containing the path, query, and fragment, relative to the http_client's base URI.</param>
+    /// <param name="token">Cancellation token for cancellation of this request operation.</param>
+    /// <returns>An asynchronous operation that is completed once a response from the request is received.</returns>
+    pplx::task<http_response> request(
+        const method &mtd,
+        const utf8string &path_query_fragment,
+        const pplx::cancellation_token &token = pplx::cancellation_token::none())
+    {
+        http_request msg(mtd);
+        msg.set_request_uri(::utility::conversions::to_string_t(path_query_fragment));
         return request(msg, token);
     }
 
