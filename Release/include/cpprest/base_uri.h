@@ -237,6 +237,14 @@ namespace web {
         /// <param name="uri_string">An encoded URI string to create the URI instance.</param>
         _ASYNCRTIMP uri(const utility::string_t &uri_string);
 
+#if defined(WIN32)
+        /// <summary>
+        /// Creates a URI from the given encoded string. This will throw an exception if the string
+        /// does not contain a valid URI. Use uri::validate if processing user-input.
+        /// </summary>
+        /// <param name="uri_string">An encoded URI string to create the URI instance.</param>
+        _ASYNCRTIMP uri(const utf8string& uri_string);
+#endif
         /// <summary>
         /// Copy constructor.
         /// </summary>

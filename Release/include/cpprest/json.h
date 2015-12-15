@@ -294,10 +294,8 @@ namespace json
         static _ASYNCRTIMP value __cdecl string(utility::string_t value, bool has_escape_chars);
 
 #ifdef _WIN32
-private:
         // Only used internally by JSON parser.
         static _ASYNCRTIMP value __cdecl string(const std::string &value);
-public:
 #endif
 
         /// <summary>
@@ -618,6 +616,16 @@ public:
         _ASYNCRTIMP value & operator [] (const utility::string_t &key);
 
 #ifdef _WIN32
+        /// <summary>
+        /// Accesses an element of a JSON object. If the key doesn't exist, this method throws.
+        /// </summary>
+        /// <param name="key">The key of an element in the JSON object.</param>
+        /// <returns>If the key exists, a reference to the value.</returns>
+        _ASYNCRTIMP const json::value& at(const utf8string& key) const
+        {
+            return at(utility::conversions::to_string_t(key));
+        }
+
         // Only used internally by JSON parser
         _ASYNCRTIMP value & operator [] (const std::string &key)
         {

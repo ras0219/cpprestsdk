@@ -104,6 +104,10 @@ utility::string_t uri_components::join()
 
 using namespace details;
 
+#if defined(WIN32)
+uri::uri(const utf8string& uri_string) : uri(utility::conversions::to_string_t(uri_string)) {}
+#endif
+
 uri::uri(const utility::string_t &uri_string)
 {
     if (!details::uri_parser::parse(uri_string, m_components))

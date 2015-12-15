@@ -167,6 +167,19 @@ public:
         }
     }
 
+#if defined(WIN32)
+    /// <summary>
+    /// Adds a header field using the '&lt;&lt;' operator.
+    /// </summary>
+    /// <param name="name">The name of the header field.</param>
+    /// <param name="value">The value of the header field.</param>
+    /// <remarks>If the header field exists, the value will be combined as comma separated string.</remarks>
+    void add(const utf8string& name, const utf8string& value)
+    {
+        add(utility::conversions::to_string_t(name), utility::conversions::to_string_t(value));
+    }
+#endif
+
     /// <summary>
     /// Removes a header field.
     /// </summary>
