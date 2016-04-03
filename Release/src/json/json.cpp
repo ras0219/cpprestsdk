@@ -396,10 +396,7 @@ bool web::json::details::_Object::has_field(const utility::string_t &key) const
 
 utility::string_t json::value::to_string() const
 {
-#ifndef _WIN32
-    utility::details::scoped_c_thread_locale locale;
-#endif
-    return m_value->to_string();
+    return serialize();
 }
 
 bool json::value::operator==(const json::value &other) const

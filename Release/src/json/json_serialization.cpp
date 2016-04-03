@@ -270,5 +270,17 @@ utility::string_t json::value::serialize() const
 #ifndef _WIN32
     utility::details::scoped_c_thread_locale locale;
 #endif
-    return m_value->to_string();
+    utility::string_t ret;
+    m_value->serialize_impl(ret);
+    return ret;
+}
+
+utf8string json::value::serialize_utf8() const
+{
+#ifndef _WIN32
+    utility::details::scoped_c_thread_locale locale;
+#endif
+    utf8string ret;
+    m_value->serialize_impl(ret);
+    return ret;
 }

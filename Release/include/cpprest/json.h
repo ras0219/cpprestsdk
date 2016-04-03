@@ -424,6 +424,12 @@ public:
         _ASYNCRTIMP utility::string_t serialize() const;
 
         /// <summary>
+        /// Serializes the current JSON value to a UTF-8 encoded C++ string.
+        /// </summary>
+        /// <returns>A utf8 string representation of the value</returns>
+        _ASYNCRTIMP utf8string serialize_utf8() const;
+
+        /// <summary>
         /// Serializes the current JSON value to a C++ string.
         /// </summary>
         /// <returns>A string representation of the value</returns>
@@ -1441,13 +1447,6 @@ public:
                 format(str);
             }
 #endif
-
-            virtual utility::string_t to_string() const
-            {
-                utility::string_t str;
-                serialize_impl(str);
-                return str;
-            }
 
             virtual json::value::value_type type() const { return json::value::Null; }
 
