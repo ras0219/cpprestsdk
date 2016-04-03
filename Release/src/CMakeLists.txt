@@ -6,6 +6,7 @@ endif()
 add_definitions(${WARNINGS})
 
 set(SOURCES_COMMON
+  http/client/http_client.cpp
   http/client/http_client_msg.cpp
   http/client/x509_cert_utilities.cpp
   http/common/http_helpers.cpp
