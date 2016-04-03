@@ -397,6 +397,8 @@ private:
 #endif
 };
 
+class http_pipeline;
+
 /// <summary>
 /// HTTP client class, used to maintain a connection to an HTTP service for an extended session.
 /// </summary>
@@ -720,7 +722,7 @@ public:
 
 private:
 
-    std::shared_ptr<::web::http::http_pipeline> m_pipeline;
+    std::shared_ptr<http_pipeline> m_pipeline;
 };
 
 namespace details {
