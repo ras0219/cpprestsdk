@@ -42,56 +42,6 @@ namespace web {
             uri_components() : m_path(_XPLATSTR("/")), m_port(-1)
             {}
 
-            uri_components(const uri_components &other) :
-                m_scheme(other.m_scheme),
-                m_host(other.m_host),
-                m_user_info(other.m_user_info),
-                m_path(other.m_path),
-                m_query(other.m_query),
-                m_fragment(other.m_fragment),
-                m_port(other.m_port)
-            {}
-
-            uri_components & operator=(const uri_components &other)
-            {
-                if (this != &other)
-                {
-                    m_scheme = other.m_scheme;
-                    m_host = other.m_host;
-                    m_user_info = other.m_user_info;
-                    m_path = other.m_path;
-                    m_query = other.m_query;
-                    m_fragment = other.m_fragment;
-                    m_port = other.m_port;
-                }
-                return *this;
-            }
-
-            uri_components(uri_components &&other) CPPREST_NOEXCEPT :
-                m_scheme(std::move(other.m_scheme)),
-                m_host(std::move(other.m_host)),
-                m_user_info(std::move(other.m_user_info)),
-                m_path(std::move(other.m_path)),
-                m_query(std::move(other.m_query)),
-                m_fragment(std::move(other.m_fragment)),
-                m_port(other.m_port)
-            {}
-
-            uri_components & operator=(uri_components &&other) CPPREST_NOEXCEPT
-            {
-                if (this != &other)
-                {
-                    m_scheme = std::move(other.m_scheme);
-                    m_host = std::move(other.m_host);
-                    m_user_info = std::move(other.m_user_info);
-                    m_path = std::move(other.m_path);
-                    m_query = std::move(other.m_query);
-                    m_fragment = std::move(other.m_fragment);
-                    m_port = other.m_port;
-                }
-                return *this;
-            }
-
             _ASYNCRTIMP utility::string_t join();
 
             utility::string_t m_scheme;
@@ -378,7 +328,7 @@ namespace web {
             return !(is_empty() || is_host_loopback() || is_host_wildcard());
         }
 
-        // <summary>
+        /// <summary>
         /// A default port is one where the port is unspecified, and will be determined by the operating system.
         /// The choice of default port may be dictated by the scheme (http -> 80) or not.
         /// </summary>
