@@ -212,7 +212,7 @@ function(add_casablanca_test NAME SOURCES_VAR)
     if (BUILD_SHARED_LIBS)
       add_test(NAME ${NAME}
         WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-        COMMAND test_runner lib${NAME}${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND test_runner $<TARGET_FILE_NAME:${NAME}>
         )
     endif()
   endif()

@@ -77,8 +77,8 @@ elseif(WIN32)
   set_source_files_properties(pch/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 
   if (NOT ${CMAKE_GENERATOR} MATCHES "Visual Studio .*")
-    set_source_files_properties(pch/stdafx.cpp PROPERTIES OBJECT_OUTPUTS "${CMAKE_CURRENT_BINARY_DIR}/stdafx.pch")
-    set_source_files_properties(${SOURCES} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/stdafx.pch")
+    set_property(SOURCE pch/stdafx.cpp APPEND PROPERTY OBJECT_OUTPUTS "${CMAKE_CURRENT_BINARY_DIR}/stdafx.pch")
+    set_property(SOURCE ${SOURCES} APPEND PROPERTY OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/stdafx.pch")
   endif()
 
   list(APPEND SOURCES pch/stdafx.cpp)
